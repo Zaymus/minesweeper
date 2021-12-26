@@ -240,11 +240,30 @@ function getNeighborNodes(x, y) {
 function gameOver() {
 	isTimerPaused = true;
 	mineLocations.forEach((mine) => {
-		grid[getLinearIndex(mine[1], mine[0])].style.backgroundImage =
-			"url('resources/images/bomb.png')";
-		grid[getLinearIndex(mine[1], mine[0])].style.backgroundPostition = "center";
-		grid[getLinearIndex(mine[1], mine[0])].style.backgroundSize = "cover";
+		if (!grid[getLinearIndex(mine[1], mine[0])].classList.contains("flagged")) {
+			grid[getLinearIndex(mine[1], mine[0])].style.backgroundImage =
+				"url('resources/images/bomb.png')";
+			grid[getLinearIndex(mine[1], mine[0])].style.backgroundPostition =
+				"center";
+			grid[getLinearIndex(mine[1], mine[0])].style.backgroundSize = "cover";
+		}
 	});
+
+	let flaggedTiles = document.querySelectorAll(".flagged");
+	console.log(flaggedTiles);
+	flaggedTiles.forEach((tile) => {
+		if (!tile.classList.contains("mine")) {
+			let col = Number(tile.getAttribute("column"));
+			let row = Number(tile.getAttribute("row"));
+
+			grid[getLinearIndex(col, row)].style.backgroundImage =
+				"url('resources/images/no-bomb.png')";
+			grid[getLinearIndex(mine[1], mine[0])].style.backgroundPostition =
+				"center";
+			grid[getLinearIndex(mine[1], mine[0])].style.backgroundSize = "cover";
+		}
+	});
+
 	grid.forEach((tile) => {
 		tile.removeEventListener("click", tileClicked);
 	});
@@ -287,8 +306,8 @@ function tileClicked(event) {
 			!event.target.classList.contains("clicked")
 		) {
 			if (event.target.classList.contains("mine")) {
-				gameOver();
 				event.target.style.backgroundColor = "red";
+				gameOver();
 			} else {
 				event.target.classList.add("clicked");
 				event.target.style.border = "2px solid hsl(0, 0%, 80%)";
