@@ -6,7 +6,7 @@
 
 ## Description
 
-#### _This project is a simple rendition of the classic game Minesweeper._
+#### _With this project, I decided to try a more JavaScript heavy project and at the time I had been playing minesweeper on my phone while I am on the go or just have a few minutes to relax as it is a very easy game to play and requires a good amount of thinking to be successful. It is also a fairly basic game in terms of the rules and code complexity. Overall, it was a very fun project and it did teach me a good amount in creating efficient algorithms through the clear empty tiles algorithm._
 
 ## Table of Contents
 
